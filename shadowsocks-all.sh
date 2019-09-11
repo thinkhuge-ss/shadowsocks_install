@@ -1161,6 +1161,53 @@ install_cleanup(){
 }
 
 install_shadowsocks(){
+
+# Insure updated ubuntu, debian, or centos system first.  otherwise, this script can hang on dependency os updates needed
+
+if check_sys sysRelease ubuntu; then
+        echo ''
+        echo 'we will need to insure we are updated for ubuntu first.  otherwise, this script can hang on dependency os updates needed'
+        sleep 10
+        export DEBIAN_FRONTEND=noninteractive
+        apt update -y
+        apt upgrade -y
+
+        if [ -f /var/run/reboot-required ]; then
+        echo ''
+        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        exit 1
+        fi
+
+elif    check_sys sysRelease debian; then
+        echo ''
+        echo 'we will need to insure we are updated for debian first.  otherwise, this script can hang on dependency os updates needed'
+        sleep 10
+        export DEBIAN_FRONTEND=noninteractive
+        apt update -y
+        apt upgrade -y
+
+        if [ -f /var/run/reboot-required ]; then
+        echo ''
+        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        exit 1
+        fi
+
+elif    check_sys sysRelease centos; then
+        echo ''
+        echo 'we will need to insure we are updated for centos first.  otherwise, this script can hang on dependency os updates needed'
+        sleep 10
+        yum install yum-utils -y
+        yum update -y
+
+        restart="$(needs-restarting -r ; echo $?)"
+        if [ "$restart" == 1 ]; then
+        echo ''
+        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        exit 1
+        fi
+
+fi
+
     disable_selinux
     install_select
     install_prepare
@@ -1359,52 +1406,6 @@ uninstall_shadowsocks(){
         fi
     fi
 }
-
-# Insure updated ubuntu, debian, or centos system first.  otherwise, this script can hang on dependency os updates needed
-
-if check_sys sysRelease ubuntu; then
-        echo ''
-        echo 'we will need to insure we are updated for ubuntu first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
-        export DEBIAN_FRONTEND=noninteractive
-        apt update -y
-        apt upgrade -y
-
-        if [ -f /var/run/reboot-required ]; then
-        echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
-        exit 1
-        fi
-
-elif    check_sys sysRelease debian; then
-        echo ''
-        echo 'we will need to insure we are updated for debian first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
-        export DEBIAN_FRONTEND=noninteractive
-        apt update -y
-        apt upgrade -y
-
-        if [ -f /var/run/reboot-required ]; then
-        echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
-        exit 1
-        fi
-
-elif    check_sys sysRelease centos; then
-        echo ''
-        echo 'we will need to insure we are updated for centos first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
-        yum install yum-utils -y
-        yum update -y
-
-        restart="$(needs-restarting -r ; echo $?)"
-        if [ "$restart" == 1 ]; then
-        echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
-        exit 1
-        fi
-
-fi
 
 # Initialization step
 action=$1
