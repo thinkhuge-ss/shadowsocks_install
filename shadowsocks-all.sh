@@ -1162,11 +1162,11 @@ install_cleanup(){
 
 install_shadowsocks(){
 
-    # Insure updated ubuntu, debian, or centos system first.  otherwise, this script can hang on dependency os updates needed
+    # Insure updated ubuntu, debian, or centos system first.  Otherwise, this script can hang on dependency os updates needed.
 
     if check_sys sysRelease ubuntu; then
         echo ''
-        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed.'
         echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         export DEBIAN_FRONTEND=noninteractive
         apt update -y
@@ -1180,7 +1180,7 @@ install_shadowsocks(){
 
     elif check_sys sysRelease debian; then
         echo ''
-        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed.'
         echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         export DEBIAN_FRONTEND=noninteractive
         apt update -y
@@ -1194,7 +1194,7 @@ install_shadowsocks(){
 
     elif check_sys sysRelease centos; then
         echo ''
-        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed.'
         echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         yum install yum-utils -y
         yum update -y
