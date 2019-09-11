@@ -1162,9 +1162,9 @@ install_cleanup(){
 
 install_shadowsocks(){
 
-# Insure updated ubuntu, debian, or centos system first.  otherwise, this script can hang on dependency os updates needed
+    # Insure updated ubuntu, debian, or centos system first.  otherwise, this script can hang on dependency os updates needed
 
-if check_sys sysRelease ubuntu; then
+    if check_sys sysRelease ubuntu; then
         echo ''
         echo 'we will need to insure we are updated for ubuntu first.  otherwise, this script can hang on dependency os updates needed'
         sleep 10
@@ -1178,7 +1178,7 @@ if check_sys sysRelease ubuntu; then
         exit 1
         fi
 
-elif    check_sys sysRelease debian; then
+    elif check_sys sysRelease debian; then
         echo ''
         echo 'we will need to insure we are updated for debian first.  otherwise, this script can hang on dependency os updates needed'
         sleep 10
@@ -1192,7 +1192,7 @@ elif    check_sys sysRelease debian; then
         exit 1
         fi
 
-elif    check_sys sysRelease centos; then
+    elif check_sys sysRelease centos; then
         echo ''
         echo 'we will need to insure we are updated for centos first.  otherwise, this script can hang on dependency os updates needed'
         sleep 10
@@ -1205,8 +1205,7 @@ elif    check_sys sysRelease centos; then
         echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
         exit 1
         fi
-
-fi
+    fi
 
     disable_selinux
     install_select
