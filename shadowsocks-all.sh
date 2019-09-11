@@ -1166,43 +1166,43 @@ install_shadowsocks(){
 
     if check_sys sysRelease ubuntu; then
         echo ''
-        echo 'we will need to insure we are updated for ubuntu first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         export DEBIAN_FRONTEND=noninteractive
         apt update -y
         apt upgrade -y
 
         if [ -f /var/run/reboot-required ]; then
         echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        echo 'Exiting before continuing.  Reboot required to finish system updates.  Re-run this script after rebooting to continue.'
         exit 1
         fi
 
     elif check_sys sysRelease debian; then
         echo ''
-        echo 'we will need to insure we are updated for debian first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         export DEBIAN_FRONTEND=noninteractive
         apt update -y
         apt upgrade -y
 
         if [ -f /var/run/reboot-required ]; then
         echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        echo 'Exiting before continuing.  Reboot required to finish system updates.  Re-run this script after rebooting to continue.'
         exit 1
         fi
 
     elif check_sys sysRelease centos; then
         echo ''
-        echo 'we will need to insure we are updated for centos first.  otherwise, this script can hang on dependency os updates needed'
-        sleep 10
+        echo 'We will need to insure we are updated for ubuntu first.  Otherwise, this script can hang on dependency os updates needed'
+        echo 'Program pause.  Press enter to continue with updating OS.  Otherwise ctrl-c'; read dummy;
         yum install yum-utils -y
         yum update -y
 
         restart="$(needs-restarting -r ; echo $?)"
         if [ "$restart" == 1 ]; then
         echo ''
-        echo 'exiting before continuing.  reboot required to finish system updates.  re-run this script after rebooting to continue'
+        echo 'Exiting before continuing.  Reboot required to finish system updates.  Re-run this script after rebooting to continue.'
         exit 1
         fi
     fi
